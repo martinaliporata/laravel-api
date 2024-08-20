@@ -13,7 +13,7 @@ class ProjectController extends Controller
         // $projects= Project::all();
 
         // questo, rispetto alla risorsa post, è lazy (lazy loading di tutti i post):
-        $projects= Project::with("user", "type", "technology")->paginate(10);
+        $projects= Project::with("user", "type", "technologies")->paginate(10);
         return response()->json([
             'success' => true,
             'results' => $projects
@@ -22,8 +22,22 @@ class ProjectController extends Controller
         return response()->json($projects);
     }
 
-    public function show(Project $project){
+    public function show(string $id){
         // ritorna un json con y cose
-
+        $project = Project::with("user", "type", "technologies")->findOrFail($id);
+        return response()->json([
+            'success' => true,
+            'results' => $project
+        ]);
     }
+
+        // se usassimo la dependency
+    // public function show(Project $project){
+        // ritorna un json con y cose
+    //     $project->loadMissing("user", "type", "technologies");
+    //     return response()->json([
+    //         'success' => true,
+    //         'results' => $project
+    //     ]);
+    // }
 }
