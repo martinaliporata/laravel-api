@@ -13,11 +13,11 @@ class ProjectController extends Controller
         // $projects= Project::all();
 
         // questo, rispetto alla risorsa post, è lazy (lazy loading di tutti i post):
-        $projects= Project::paginate(10);
+        $projects= Project::with("user", "type", "technology")->paginate(10);
         return response()->json([
             'success' => true,
             'results' => $projects
-        ])
+        ]);
         // ritorna un json con x cose
         return response()->json($projects);
     }
