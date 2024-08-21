@@ -40,4 +40,14 @@ class ProjectController extends Controller
     //         'results' => $project
     //     ]);
     // }
+
+    public function projectSearch(Request $request) {
+        $data=$request->all();
+        $projects = Project::where("title", "LIKE", "%" . $data["title"] . "%")->get();
+
+        return response()->json([
+            'success' => true,
+            'results' => $projects
+        ]);
+    }
 }
