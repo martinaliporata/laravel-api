@@ -26,7 +26,7 @@ class StoreProjectRequest extends FormRequest
             "preview"=>["required", "string", "min:3", "max:250"],
             // esiste nella tabella con la colonna id
             "type_id"=>["required", "integer", "exists:types,id"],
-            "technologies"=>["required", "array", "exists:technologies,id"],
+            "technologies"=>["required", "array", "min:3", "exists:technologies,id"],
             "image"=>["required","image","mimes:jpeg,png,jpg,gif,svg","max:2048"]
         ];
     }

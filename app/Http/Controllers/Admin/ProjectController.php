@@ -94,10 +94,15 @@ class ProjectController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Project $project)
-    {
-        $project->technologies()->detach();
-        $project->delete();
+{
+    // Stacca le tecnologie associate (se esiste una relazione many-to-many)
+    $project->technologies()->detach();
 
-        return redirect()->route('admin.projects.index');
-    }
+    // Elimina il progetto
+    $project->delete();
+
+    // Redirigi alla lista dei progetti
+    return redirect()->route('admin.projects.index')->with('success', 'Progetto eliminato con successo');
+}
+
 }

@@ -26,11 +26,12 @@
     <div>
         <a href="{{route('admin.projects.index')}}" class="btn btn-primary btn-sm">Return to projects' list</a>
         <a href="{{route('admin.projects.edit', $project)}}" class="btn btn-primary btn-sm"> Edit</a>
-        <form action="{{route('admin.projects.index')}}" method="POST" class="d-inline-block form-destroyer">
-            @method("delete")
+        <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" class="d-inline-block form-destroyer">
             @csrf
-            <input type="submit" class="btn btn-warning btn-sm" value="Delete">
+            @method('DELETE')
+            <button type="submit" class="btn btn-warning btn-sm" value="Delete">Delete</button>
         </form>
+
     </div>
 </div>
 @endsection
